@@ -8,7 +8,7 @@
 </script>
 
 <template>
-
+	<ProjectMain> </ProjectMain>
 </template>
 
 <style scoped>
