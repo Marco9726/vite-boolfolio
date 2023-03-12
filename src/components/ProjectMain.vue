@@ -59,12 +59,19 @@
 										<h5>
 											{{ project.title }}
 										</h5>
+										<em v-if="project.type">
+											{{ project.type.name }}
+										</em>
 									</div>
 									<div class="card-text">
-										<!-- creare funzione per excerpt -->
 										<p>
 											{{ project.description }}
 										</p>
+										<ul v-if="project.technologies">
+											<li v-for="technology in project.technologies" :key="technology.id">
+												{{ technology.name }}
+											</li>
+										</ul>
 									</div>
 									<!-- <a href="#" class="btn btn-success">
 										visualizza progetto
