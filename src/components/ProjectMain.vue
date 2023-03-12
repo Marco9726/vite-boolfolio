@@ -1,7 +1,11 @@
 <script>
 	import axios from 'axios';
+	import ProjectCard from './ProjectCard.vue';
 	export default{
 		name: 'ProjectMain',
+		components:{
+			ProjectCard
+		},
 		data(){
 			return{
 				projects: [],
@@ -49,35 +53,8 @@
 					</div>
 					<div v-else id="content-container">
 						<div class="d-flex justify-content-between flex-wrap">
-							<!-- ciclo i progetti ottenuti da getProjects -->
-							<div class="card my-3" v-for="project in projects" :key="project.id">
-								<div class="card-body">
-									<div class="card-img-top mb-2">
-										<img :src="project.cover_image != null ? project.cover_image : 'https://avatars.mds.yandex.net/i?id=8d48f296e8bb9995f9401bfaf34c93637815f6a2-8219873-images-thumbs&n=13'" :alt="project.title" class="img-fluid">
-									</div>
-									<div class="card-title">
-										<h5>
-											{{ project.title }}
-										</h5>
-										<em v-if="project.type">
-											{{ project.type.name }}
-										</em>
-									</div>
-									<div class="card-text">
-										<p>
-											{{ project.description }}
-										</p>
-										<ul v-if="project.technologies">
-											<li v-for="technology in project.technologies" :key="technology.id">
-												{{ technology.name }}
-											</li>
-										</ul>
-									</div>
-									<!-- <a href="#" class="btn btn-success">
-										visualizza progetto
-									</a> -->
-								</div>
-							</div>			
+							<!-- ciclo le ProjectCard nei progetti ottenuti da getProjects -->
+							<ProjectCard v-for="project in projects" :key="project.id" :project="project" />
 						</div>
 						<!-- Pagination nav -->
 						<nav id="pagination-nav">
@@ -110,8 +87,5 @@
 				background-color: rgb(235, 235, 235);
 			}
 		}
-	}
-	.card{
-		width: calc(100% / 3 - 1rem);
 	}
 </style>
