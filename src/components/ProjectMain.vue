@@ -20,7 +20,6 @@
 				this.loading = true;
 				axios.get(`${this.Uri}/api/projects`, { params:{ page: number_page }} ).then((response) => {
 					if(response.data.success){
-						console.log(response.data);
 						//Se restituisco tutti gli i record della table dal backend con Project::all()
 						// this.projects = response.data.results
 

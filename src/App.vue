@@ -8,7 +8,7 @@
 </script>
 
 <template>
-	<ProjectMain> </ProjectMain>
+	<router-view> </router-view>
 </template>
 
 <style scoped>
