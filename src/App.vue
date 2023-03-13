@@ -1,13 +1,15 @@
 <script>
-	import ProjectMain from './components/ProjectMain.vue';
-	export default{
-		components:{
-			ProjectMain
+	import AppHeader from './components/AppHeader.vue';
+
+		export default{
+			components:{
+				AppHeader
+			}
 		}
-	}
 </script>
 
 <template>
+	<AppHeader></AppHeader>
 	<router-view> </router-view>
 </template>
 
