@@ -8,6 +8,10 @@ export default {
 					label: 'Homepage',
 					routeName: 'homepage'
 				},
+				{
+					label: 'Progetti',
+					routeName: 'projectslist'
+				},
 			]
 		}
 	}
