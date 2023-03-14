@@ -34,13 +34,15 @@ export default {
 					<li v-for="technology in project.technologies" :key="technology.id">
 						{{ technology.name }}
 					</li>
-				</ul>
+				</ul>	
+				<router-link :to="{ name: 'singleproject', params: { slug: project.slug }}" class="btn btn-success">	
+					visualizza progetto
+				</router-link>
 			</div>
 		</div>
 	</div>			
 </template>
 <style lang="scss">
-
 	.card{
 		width: calc(100% / 3 - 1rem);
 	}

@@ -11,14 +11,13 @@
 			return{
 				store,
 				projects: [],
-				loading: true,
 				currentPage: 1,
 				lastPage: null
 			}
 		},
 		methods:{
 			getProjects(number_page){
-				this.loading = true;
+				this.store.loading = true;
 				axios.get(`${this.store.Uri}/api/projects`, { params:{ page: number_page }} ).then((response) => {
 					if(response.data.success){
 						//Se restituisco tutti gli i record della table dal backend con Project::all()
@@ -28,7 +27,7 @@
 						this.projects = response.data.results.data;
 						this.currentPage = response.data.results.current_page;
 						this.lastPage = response.data.results.last_page;
-						this.loading = false;
+						this.store.loading = false;
 					}
 				})
 			}
@@ -48,7 +47,7 @@
 					<h2 class="text-center">Boolpress</h2>
 				</div>
 				<div class="col-12">
-					<div v-if="this.loading == true" id="loader">
+					<div v-if="this.store.loading == true" id="loader">
 						in caricamento
 					</div>
 					<div v-else id="content-container">
