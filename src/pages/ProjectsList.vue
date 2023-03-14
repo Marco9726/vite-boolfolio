@@ -1,5 +1,6 @@
 <script>
 	import axios from 'axios';
+	import { store } from '../store.js';
 	import ProjectCard from '../components/ProjectCard.vue';
 	export default{
 		name: 'ProjectsList',
@@ -8,9 +9,9 @@
 		},
 		data(){
 			return{
+				store,
 				projects: [],
 				loading: true,
-				Uri: 'http://127.0.0.1:8000',
 				currentPage: 1,
 				lastPage: null
 			}
@@ -18,7 +19,7 @@
 		methods:{
 			getProjects(number_page){
 				this.loading = true;
-				axios.get(`${this.Uri}/api/projects`, { params:{ page: number_page }} ).then((response) => {
+				axios.get(`${this.store.Uri}/api/projects`, { params:{ page: number_page }} ).then((response) => {
 					if(response.data.success){
 						//Se restituisco tutti gli i record della table dal backend con Project::all()
 						// this.projects = response.data.results

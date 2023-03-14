@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store.js';
 export default {
 	name: 'ProjectCard',
 	props:{
@@ -6,7 +7,7 @@ export default {
 	},
 	data(){
 			return{
-				Uri: 'http://127.0.0.1:8000'
+				store
 			}
 		},
 }
@@ -15,7 +16,7 @@ export default {
 	<div class="card my-3">
 		<div class="card-body">
 			<div class="card-img-top mb-2">
-				<img :src="project.cover_image != null ? `${Uri}/storage/${ project.cover_image}` : 'https://avatars.mds.yandex.net/i?id=8d48f296e8bb9995f9401bfaf34c93637815f6a2-8219873-images-thumbs&n=13'" :alt="project.title" class="img-fluid">
+				<img :src="project.cover_image != null ? `${store.Uri}/storage/${ project.cover_image}` : 'https://avatars.mds.yandex.net/i?id=8d48f296e8bb9995f9401bfaf34c93637815f6a2-8219873-images-thumbs&n=13'" :alt="project.title" class="img-fluid">
 			</div>
 			<div class="card-title">
 				<h5>
