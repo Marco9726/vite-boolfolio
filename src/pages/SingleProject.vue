@@ -11,10 +11,18 @@
 			}
 		},
 		mounted(){
+			this.loading = true;
 			axios.get(`${this.store.Uri}/api/projects/${this.$route.params.slug}`).then((response) => {
-				console.log(response);
-				this.project = response.data.result;
-				this.loading = false
+				// se la chiamata avviene con successo 
+				if(response.data.success){
+					// console.log(response);
+					this.project = response.data.result;
+					this.loading = false
+				}
+				//altrimenti, reindirizzo ad una pagina di errore
+				else{
+					this.$router.push({ name: 'non-trovato' })
+				}
 			})
 		}
 	}
@@ -30,7 +38,7 @@
 				<div class="col-12" v-else>
 					<h2 class="text-center">{{ this.project.title }}</h2>
 					<div class="row my-4">
-						<div class="col-6 img-container"> <!--se l'immagine non è null, la mostro, altrimento carico un'immagine placeholder-->
+						<div class="col-6 img-container"> <!--se l'immagine non è null, la mostro, altrimenti carico un'immagine placeholder-->
 							<img :src="project.cover_image != null ? `${store.Uri}/storage/${ project.cover_image}` : 'https://avatars.mds.yandex.net/i?id=8d48f296e8bb9995f9401bfaf34c93637815f6a2-8219873-images-thumbs&n=13'" :alt="project.title" class="w-100">
 						</div>
 						<div class="col-6"> 
@@ -48,9 +56,9 @@
 									</li>
 								</ul>
 							</div>
+							<router-link :to="{ name: 'projectslist' }" class="btn btn-warning">Torna ai progetti</router-link>
 						</div>
-					</div>
-					
+					</div>		
 				</div>
 			</div>
 		</div>

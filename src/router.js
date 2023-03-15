@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from './pages/HomePage.vue';
 import ProjectsList from './pages/ProjectsList.vue';
 import SingleProject from './pages/SingleProject.vue';
+import NotFound from './pages/NotFound.vue';
 //creo l'oggetto router
 const router = createRouter({
 	history: createWebHistory(),
@@ -23,6 +24,12 @@ const router = createRouter({
 			path: '/progetti/:slug', //nome del :parametro deve coincidere con quello inserito nella rotta in api.php
 			name: 'singleproject',
 			component: SingleProject
+		},
+		//sempre per ultima, la pagina di errore
+		{
+			path: '/*',
+			name: 'non-trovato',
+			component: NotFound
 		}
 	]
 });
