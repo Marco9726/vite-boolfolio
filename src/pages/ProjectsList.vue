@@ -10,6 +10,7 @@
 		data(){
 			return{
 				store,
+				loading: true,
 				projects: [],
 				currentPage: 1,
 				lastPage: null
@@ -17,7 +18,6 @@
 		},
 		methods:{
 			getProjects(number_page){
-				this.store.loading = true;
 				axios.get(`${this.store.Uri}/api/projects`, { params:{ page: number_page }} ).then((response) => {
 					if(response.data.success){
 						//Se restituisco tutti gli i record della table dal backend con Project::all()
@@ -27,7 +27,7 @@
 						this.projects = response.data.results.data;
 						this.currentPage = response.data.results.current_page;
 						this.lastPage = response.data.results.last_page;
-						this.store.loading = false;
+						this.loading = false;
 					}
 				})
 			}

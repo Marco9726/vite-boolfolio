@@ -1,6 +1,5 @@
 import { reactive } from 'vue';
 
 export const store = reactive({
-	Uri: 'http://127.0.0.1:8000',
-	loading: true
+	Uri: 'http://127.0.0.1:8000'
 })
