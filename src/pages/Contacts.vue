@@ -5,15 +5,20 @@
 		data(){
 			return{
 				store,
+				//form
 				name: '',
 				surname: '',
 				mail: '',
 				phone: '',
-				message: ''
+				message: '',
+				//errori
+				errors: null,
+
+				
 			}
 		},
 		methods: {
-			snedForm(){
+			sendForm(){
 				const data = {
 					name: this.name,
 					surname: this.surname,
@@ -22,9 +27,18 @@
 					message: this.message
 				}
 
-				// axios.post(`${this.store.Uri}/api/contacts`, data).then((response) => {
-
-				// })
+				axios.post(`${this.store.Uri}/api/contacts`, data).then((response) => {
+					if(!this.success){
+						this.errors = response.data.errors
+					}
+					else{
+						this.name = '';
+						this.surname = '';
+						this.mail = '';
+						this.phone = '';
+						this.message = ''
+					}
+				})
 			}
 		},
 	}
@@ -45,7 +59,7 @@
 			</div>
 			<div class="col-12 my-5">
 				<h4 class="text-center">Scrivici</h4>
-				<form action="" @submit="sendForm">
+				<form @submit="sendForm">
 					<div class="row justify-content-center">
 						<div class="col-12 col-md-6 my-2">
 							<label for="inputName" class="control-label mb-1">Nome</label>
