@@ -11,10 +11,10 @@
 				mail: '',
 				phone: '',
 				message: '',
-				//errori
+				//
 				errors: null,
-
-				
+				success: false,
+				loading: false
 			}
 		},
 		methods: {
@@ -27,8 +27,10 @@
 					message: this.message
 				}
 
+				this.loading = true;
+
 				axios.post(`${this.store.Uri}/api/contacts`, data).then((response) => {
-					if(!this.success){
+					if(!response.data.success){
 						this.errors = response.data.errors
 					}
 					else{
@@ -36,11 +38,13 @@
 						this.surname = '';
 						this.mail = '';
 						this.phone = '';
-						this.message = ''
+						this.message = '';
+						this.success = true;
+						this.loading = false
 					}
 				})
 			}
-		},
+		}
 	}
 </script>
 
@@ -57,9 +61,12 @@
 					<div class="col-6 text-center">Email: sjshsvstsysjw</div>
 				</div>
 			</div>
+			<div class="col-12 my-5" v-if="success">
+				email inviata con successo
+			</div>
 			<div class="col-12 my-5">
 				<h4 class="text-center">Scrivici</h4>
-				<form @submit="sendForm">
+				<form @submit.prevent="sendForm">
 					<div class="row justify-content-center">
 						<div class="col-12 col-md-6 my-2">
 							<label for="inputName" class="control-label mb-1">Nome</label>
@@ -82,7 +89,7 @@
 							<textarea name="message" id="textMessage" class="form-control" cols="50" rows="5" v-model="message"></textarea>
 						</div>
 						<div class="col-12 text-center">
-							<button type="submit" class="btn btn-success">Invia</button>
+							<button type="submit" class="btn btn-success" :disabled="loading">{{ loading ? 'Invio email...' : 'Invia' }}</button>
 						</div>
 					</div>
 				</form>
