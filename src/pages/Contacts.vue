@@ -28,6 +28,7 @@
 				}
 
 				this.loading = true;
+				this.errors = null
 
 				axios.post(`${this.store.Uri}/api/contacts`, data).then((response) => {
 					if(!response.data.success){
@@ -71,37 +72,47 @@
 					<div class="row justify-content-center">
 						<div class="col-12 col-md-6 my-2">
 							<label for="inputName" class="control-label mb-1">Nome</label>
-							<input type="text" class="form-control" name="name" id="inputName" placeholder="Inserisci il nome" v-model="name">
-							<div v-for="(error,index) in errors.name" :key="index" class="text-danger">
-								{{ error }}
+							<input type="text" class="form-control" name="name" id="inputName" placeholder="Inserisci il nome" v-model="name" :class="{ 'is-invalid': errors.name }">
+							<div v-if="errors != null">
+								<div v-for="(error,index) in errors.name" :key="index" class="text-danger">
+									{{ error }}
+								</div>
 							</div>
 						</div>
 						<div class="col-12 col-md-6 my-2">
 							<label for="inputSurname" class="control-label mb-1">Cognome</label>
-							<input type="text" class="form-control" name="surname" id="inputSurname" placeholder="Inserisci il cognome" v-model="surname">
-							<div v-for="(error,index) in errors.surname" :key="index" class="text-danger">
-								{{ error }}
+							<input type="text" class="form-control" name="surname" id="inputSurname" placeholder="Inserisci il cognome" v-model="surname" :class="{ 'is-invalid': errors.surname }">
+							<div v-if="errors != null">
+								<div v-for="(error,index) in errors.surname" :key="index" class="text-danger">
+									{{ error }}
+								</div>
 							</div>
 						</div>
 						<div class="col-12 col-md-6">
 							<label for="inputMail" class="control-label mb-1">Email</label>
-							<input type="mail" class="form-control" name="mail" id="inputMail" placeholder="Inserisci un'email" v-model="mail">
-							<div v-for="(error,index) in errors.mail" :key="index" class="text-danger">
-								{{ error }}
+							<input type="mail" class="form-control" name="mail" id="inputMail" placeholder="Inserisci un'email" v-model="mail" :class="{ 'is-invalid': errors.mail }">
+							<div v-if="errors != null">
+								<div v-for="(error,index) in errors.mail" :key="index" class="text-danger">
+									{{ error }}
+								</div>
 							</div>
 						</div>
 						<div class="col-12 col-md-6">
 							<label for="inputPhone" class="control-label mb-1">Telefono</label>
-							<input type="phone" class="form-control" name="phone" id="inputPhone" placeholder="Inserisci il numero di telefono" v-model="phone">
-							<div v-for="(error,index) in errors.phone" :key="index" class="text-danger">
-								{{ error }}
+							<input type="phone" class="form-control" name="phone" id="inputPhone" placeholder="Inserisci il numero di telefono" v-model="phone" :class="{ 'is-invalid': errors.phone }">
+							<div v-if="errors != null">
+								<div v-for="(error,index) in errors.phone" :key="index" class="text-danger">
+									{{ error }}
+								</div>
 							</div>
 						</div>
 						<div class="col-12 my-3">
 							<label for="textMessage" class="control-label mb-2 d-block">Lascia un messaggio</label>
-							<textarea name="message" id="textMessage" class="form-control" cols="50" rows="5" v-model="message"></textarea>
-							<div v-for="(error,index) in errors.message" :key="index" class="text-danger">
-								{{ error }}
+							<textarea name="message" id="textMessage" class="form-control" cols="50" rows="5" v-model="message" :class="{ 'is-invalid': errors.message }"></textarea>
+							<div v-if="errors != null">
+								<div v-for="(error,index) in errors.message" :key="index" class="text-danger">
+									{{ error }}
+								</div>
 							</div>
 						</div>
 						<div class="col-12 text-center">
